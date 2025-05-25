@@ -1,0 +1,14 @@
+# =============================================================================
+# REQUIREMENTS.TXT CONTENT
+# =============================================================================
+"""
+Requirements to install:
+pip install pyspark
+pip install yfinance
+pip install pandas
+pip install numpy
+pip install requests
+
+For running in Jupyter/Colab, also install:
+pip install findspark
+"""

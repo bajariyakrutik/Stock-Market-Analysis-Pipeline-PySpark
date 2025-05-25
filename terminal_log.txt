@@ -1,0 +1,150 @@
+(CV) krutikbajariya@Mac PySpark % python main_pipeline.py                      
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+25/05/25 12:39:21 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+=== Starting Stock Market Data Pipeline ===
+
+--- Step 1: Data Extraction ---
+Starting data extraction using Alpha Vantage library...
+API Key: **********NVLC
+Output size: full
+Fetching data for AAPL... (1/10)
+✓ Successfully extracted 6430 records for AAPL
+  Date range: 1999-11-01 to 2025-05-23
+Waiting 12s to respect API rate limits...
+25/05/25 12:39:32 WARN GarbageCollectionMetrics: To enable non-built-in garbage collector(s) List(G1 Concurrent GC), users should configure it(them) to spark.eventLog.gcMetrics.youngGenerationGarbageCollectors or spark.eventLog.gcMetrics.oldGenerationGarbageCollectors
+Fetching data for GOOGL... (2/10)
+✓ Successfully extracted 5225 records for GOOGL
+  Date range: 2004-08-19 to 2025-05-23
+Waiting 12s to respect API rate limits...
+Fetching data for MSFT... (3/10)
+✓ Successfully extracted 6430 records for MSFT
+  Date range: 1999-11-01 to 2025-05-23
+Waiting 12s to respect API rate limits...
+Fetching data for AMZN... (4/10)
+✓ Successfully extracted 6430 records for AMZN
+  Date range: 1999-11-01 to 2025-05-23
+Waiting 12s to respect API rate limits...
+Fetching data for TSLA... (5/10)
+✓ Successfully extracted 3750 records for TSLA
+  Date range: 2010-06-29 to 2025-05-23
+Waiting 12s to respect API rate limits...
+Fetching data for NVDA... (6/10)
+✓ Successfully extracted 6430 records for NVDA
+  Date range: 1999-11-01 to 2025-05-23
+Waiting 12s to respect API rate limits...
+Fetching data for META... (7/10)
+✓ Successfully extracted 3273 records for META
+  Date range: 2012-05-18 to 2025-05-23
+Waiting 12s to respect API rate limits...
+Fetching data for NFLX... (8/10)
+✓ Successfully extracted 5789 records for NFLX
+  Date range: 2002-05-23 to 2025-05-23
+Waiting 12s to respect API rate limits...
+Fetching data for AMD... (9/10)
+✓ Successfully extracted 6430 records for AMD
+  Date range: 1999-11-01 to 2025-05-23
+Waiting 12s to respect API rate limits...
+Fetching data for CRM... (10/10)
+✓ Successfully extracted 5265 records for CRM
+  Date range: 2004-06-23 to 2025-05-23
+
+Combining data from all stocks...
+
+✅ Data extraction completed successfully!
+✓ Total records: 55,452
+✓ Stocks: 10/10
+✓ Date range: 1999-11-01 to 2025-05-23
+✓ Saved to: data/raw_stock_data/raw_stock_data.csv
+✓ Column names: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbol', 'Company_Name', 'Sector', 'Industry']
+
+--- Step 2: Data Cleaning ---
+Loading and cleaning data with PySpark...
+Loaded columns: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbol', 'Company_Name', 'Sector', 'Industry']
+✓ Cleaned data: 55452 records
+
+--- Step 3: Technical Analysis ---
+Calculating technical indicators...
+✓ Technical indicators calculated
+
+--- Step 4: Portfolio Analysis ---
+Calculating portfolio metrics...
+✓ Portfolio metrics calculated
+
+--- Step 5: Risk Analysis ---
+Calculating risk metrics...
+✓ Risk metrics calculated
+
+--- Step 6: Saving Results ---
+Preparing data for Tableau...
+Saving technical data...
+25/05/25 12:41:16 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+Saving portfolio data...                                                        
+25/05/25 12:41:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/05/25 12:41:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/05/25 12:41:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/05/25 12:41:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/05/25 12:41:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/05/25 12:41:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/05/25 12:41:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/05/25 12:41:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/05/25 12:41:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+Saving risk metrics...
+Saving daily summary...
+✓ All Tableau datasets saved successfully!
+
+=== Pipeline Completed Successfully ===
+
+==================================================
+SAMPLE RESULTS
+==================================================
+
+📊 Technical Indicators (Recent 5 records):
++----------+------+-----------+------------------+------------------+---------+----------+
+|trade_date|symbol|close_price|ma_20             |rsi               |ma_signal|rsi_signal|
++----------+------+-----------+------------------+------------------+---------+----------+
+|2025-05-23|AAPL  |195.27     |205.76550000000003|45.10546241211469 |SELL     |NEUTRAL   |
+|2025-05-23|AMD   |110.31     |106.0575          |64.79902557856272 |BUY      |NEUTRAL   |
+|2025-05-23|AMZN  |200.99     |197.06799999999998|66.6288050885961  |BUY      |NEUTRAL   |
+|2025-05-23|CRM   |273.13     |279.553           |50.517384105960254|SELL     |NEUTRAL   |
+|2025-05-23|GOOGL |168.47     |162.13399999999996|54.65879265091862 |BUY      |NEUTRAL   |
++----------+------+-----------+------------------+------------------+---------+----------+
+only showing top 5 rows
+
+
+📈 Risk Metrics by Stock:
++------+--------------------+---------------------+-------------------+-------------+
+|symbol|annualized_return   |annualized_volatility|sharpe_ratio       |risk_category|
++------+--------------------+---------------------+-------------------+-------------+
+|NFLX  |0.23315962018709566 |0.4404613887310192   |0.5293531423011553 |High Risk    |
+|CRM   |0.23164322178863672 |0.35299609641546975  |0.6562203495757557 |Medium Risk  |
+|AMZN  |0.13077050846784996 |0.40614387270918667  |0.32198074932300225|High Risk    |
+|NVDA  |0.11651039043900778 |0.5010818396849136   |0.2325176871551979 |High Risk    |
+|AAPL  |0.11558618623690389 |0.31739691611395415  |0.3641692164249173 |Medium Risk  |
+|TSLA  |0.08726850091458972 |0.4728489957708523   |0.18455892197110846|High Risk    |
+|META  |0.08218105456604038 |0.2905634168365219   |0.28283345322951464|Medium Risk  |
+|MSFT  |0.08023201029689947 |0.2403862893499571   |0.33376283861221717|Medium Risk  |
+|GOOGL |0.018318622023039077|0.23830181356234856  |0.07687151746432785|Medium Risk  |
+|AMD   |-0.1480074732964892 |0.5132688373324873   |-0.2883624769929532|High Risk    |
++------+--------------------+---------------------+-------------------+-------------+
+
+
+💼 Portfolio Performance (Recent 5 days):
++----------+-------------------+----------------------+--------------------+------------------+
+|trade_date|avg_portfolio_price|avg_daily_return      |portfolio_volatility|avg_rsi           |
++----------+-------------------+----------------------+--------------------+------------------+
+|2025-05-23|368.14300000000003 |0.0035528662797593507 |0.010918984802657605|62.860873612236915|
+|2025-05-22|372.27299999999997 |0.003083645756051696  |0.01029109160542518 |64.76274330316338 |
+|2025-05-21|371.523            |-0.004052937092202681 |0.01583633525765208 |66.5056354059108  |
+|2025-05-20|374.197            |-0.0027986671676566025|0.006711682878031489|72.10515439086333 |
+|2025-05-19|375.245            |0.01286418654389195   |0.009575717753858062|72.6907783718541  |
++----------+-------------------+----------------------+--------------------+------------------+
+only showing top 5 rows
+
+
+✅ Pipeline completed successfully!
+📁 Data saved to: data/tableau_ready
+📊 Total records processed: 55,452
+📅 Date range: 1999-11-01 to 2025-05-23
+
+🔄 Spark session closed.
