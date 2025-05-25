@@ -1,6 +1,7 @@
 (CV) krutikbajariya@Mac PySpark % python main_pipeline.py                      
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+---WDZR8FAMJHDRNVLC---
 25/05/25 12:39:21 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 === Starting Stock Market Data Pipeline ===
 
